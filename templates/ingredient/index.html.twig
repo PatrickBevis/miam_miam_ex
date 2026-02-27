@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ingredient index{% endblock %}
+
+{% block body %}
+<h1 class="text-5xl p-20 text-center text-red-400 font-bold">
+    Ingredient index
+</h1>
+
+<div class="text-xl text-center flex justify-center">
+    <div class="w-full max-w-4xl">
+        <table class="table-auto w-full">
+            <thead>
+                <tr class="border-b">
+                    <th class="py-2 px-4">Id</th>
+                    <th class="py-2 px-4">Name</th>
+                    <th class="py-2 px-4">Price</th>
+                    <th class="py-2 px-4">Created at</th>
+                    <th class="py-2 px-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ingredient in ingredients %}
+                <tr class="border-b">
+                    <td class="py-2 px-4">{{ ingredient.id }}</td>
+                    <td class="py-2 px-4">{{ ingredient.name }}</td>
+                    <td class="py-2 px-4">{{ ingredient.price }} €</td>
+                    <td class="py-2 px-4">
+                        {{ ingredient.createdAt ? ingredient.createdAt|date('d/m/Y') : '' }}
+                    </td>
+                    <td class="py-2 px-4">
+                        <div class="flex justify-center gap-6">
+                            <a href="{{ path('app_ingredient_show', {'id': ingredient.id}) }}"
+                               class="btn bg-red-400 text-white border px-3 font-bold">
+                                show
+                            </a>
+                            <a href="{{ path('app_ingredient_edit', {'id': ingredient.id}) }}"
+                               class="btn bg-red-400 text-white border px-3 font-bold">
+                                edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-gray-500">
+                        no records found
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="mt-10 text-center">
+            <a href="{{ path('app_ingredient_new') }}"
+               class="btn bg-white text-violet-700 border p-2 font-bold">
+                Create new
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
