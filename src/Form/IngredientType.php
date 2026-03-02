@@ -13,11 +13,7 @@ class IngredientType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('price')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-        ;
+            ->add('price');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
