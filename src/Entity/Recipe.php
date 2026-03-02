@@ -184,7 +184,6 @@ class Recipe
         return $this->updateAt;
     }
 
-    #[ORM\PrePersist]
     public function setUpdateAt(\DateTimeImmutable $updateAt): static
     {
         $this->updateAt = $updateAt;
