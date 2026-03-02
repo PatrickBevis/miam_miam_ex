@@ -1,0 +1,50 @@
+<nav class="fixed left-0 top-0 h-screen w-64 bg-yellow-200 p-6 border-r-3 border-red-400">
+  <div class="flex flex-col text-red-400 h-full">
+
+    <a href="{{ path('home') }}" class="text-3xl font-bold mb-12">
+      Miam-Miam
+    </a>
+
+    <div class="flex flex-col gap-6 text-xl font-bold">
+      <a href="{{ path('home') }}" class="hover:text-gray-600">
+        Home
+      </a>
+      {# {% if is_granted('ROLE_ADMIN') %}
+       <a href="{{ path('admin') }}">Admin</a>
+      {% endif %} #}
+      <a href="{{ path('app_recipe_index') }}" class="hover:text-gray-600" >Recipe</a>
+      <a href="{{ path('app_ingredient_index') }}" class="hover:text-gray-600">Ingredient</a>
+    </div>
+   
+   
+    <div class="mt-auto text-sm  text-violet-400">
+
+    {# <div class="flex flex-col text-white mb-12 text-xl font-bold">
+    {% if app.user %}
+        {{ app.user.firstname }} {{ app.user.lastname }}
+         <a href="{{ path('app_logout') }}" class="btn bg-white text-violet-700 text-center mt-12 px-6 py-2 font-bold hover:cursor-pointer">
+            Log out
+        </a>
+    {% else %}
+        <a href="{{ path('app_login') }}" class="btn bg-white text-violet-700 text-center px-6 py-2 font-bold hover:cursor-pointer">
+            Log in
+        </a>
+        <p class='text-center'>OR</p>
+         <a href="{{ path('app_register') }}" class="btn bg-white text-violet-700 text-center px-6 py-2 font-bold hover:cursor-pointer">
+            Register
+        </a>
+    {% endif %} #}
+</div>
+
+{#       
+        <a href="{{ path('app_legals_notices') }}" class="hover:text-gray-100"> Legals notices</a> |
+        <a href="{{ path('app_accessibility') }}" class="hover:text-gray-100">Accessibility</a> |
+        <a href="{{ path('app_cookies') }}" class="hover:text-gray-100">Cookies</a> |
+        <a href="{{ path('app_privacy') }}" class="hover:text-gray-100">Privacy politcs</a> |
+        <a href="{{ path('app_cgv') }}" class="hover:text-gray-100">CGV</a> |
+        <a href="{{ path('app_cgu') }}" class="hover:text-gray-100">CGU</a> #}
+        <div class="text-center">© {{ "now"|date("Y") }} Miam-Miam.</div>
+    </div>
+
+  </div>
+</nav>

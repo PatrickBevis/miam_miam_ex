@@ -3,12 +3,19 @@
 {% block title %}Ingredient index{% endblock %}
 
 {% block body %}
-<h1 class="text-5xl p-20 text-center text-red-400 font-bold">
+<h1 class="text-5xl p-12 text-center text-red-400 font-bold">
     Ingredient index
 </h1>
 
 <div class="text-xl text-center flex justify-center">
     <div class="w-full max-w-4xl">
+        <div class="mb-10 text-center">
+            <a href="{{ path('app_ingredient_new') }}"
+               class="btn bg-red-400 text-white border px-3  font-bold">
+                Create new
+            </a>
+        </div>
+
         <table class="table-auto w-full">
             <thead>
                 <tr class="border-b">
@@ -55,12 +62,7 @@
         {{ knp_pagination_render(ingredients) }}
     </div>
 
-        <div class="mt-10 text-center">
-            <a href="{{ path('app_ingredient_new') }}"
-               class="btn bg-red-400 text-white border px-3  font-bold">
-                Create new
-            </a>
-        </div>
+        
     </div>
 </div>
 {% endblock %}

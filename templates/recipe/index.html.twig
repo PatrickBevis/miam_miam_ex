@@ -3,49 +3,79 @@
 {% block title %}Recipe index{% endblock %}
 
 {% block body %}
-    <h1>Recipe index</h1>
+<h1 class="text-5xl p-12 text-center text-red-400 font-bold">
+    Recipe index
+</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Time</th>
-                <th>Nb_people</th>
-                <th>Difficulty</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>IsFavorite</th>
-                <th>CreatedAt</th>
-                <th>UpdateAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for recipe in recipes %}
-            <tr>
-                <td>{{ recipe.id }}</td>
-                <td>{{ recipe.name }}</td>
-                <td>{{ recipe.time }}</td>
-                <td>{{ recipe.nbPeople }}</td>
-                <td>{{ recipe.difficulty }}</td>
-                <td>{{ recipe.description }}</td>
-                <td>{{ recipe.price }}</td>
-                <td>{{ recipe.isFavorite ? 'Yes' : 'No' }}</td>
-                <td>{{ recipe.createdAt ? recipe.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ recipe.updateAt ? recipe.updateAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}">show</a>
-                    <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="text-xl text-center flex justify-center">
+    <div class="w-full max-w-6xl">
+        <div class="mb-16 text-center">
+            <a href="{{ path('app_recipe_new') }}"
+               class="btn bg-red-400 text-white border px-3 font-bold">
+                Create new
+            </a>
+        </div>
+        <table class="table-auto w-full">
+            <thead>
+                <tr class="border-b">
+                    <th class="py-2 px-4">Id</th>
+                    <th class="py-2 px-4">Name</th>
+                    <th class="py-2 px-4">Time</th>
+                    <th class="py-2 px-4">Nb_people</th>
+                    <th class="py-2 px-4">Difficulty</th>
+                    <th class="py-2 px-4">Description</th>
+                    <th class="py-2 px-4">Price</th>
+                    <th class="py-2 px-4">IsFavorite</th>
+                    <th class="py-2 px-4">CreatedAt</th>
+                    <th class="py-2 px-4">UpdateAt</th>
+                    <th class="py-2 px-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for recipe in recipes %}
+                <tr class="border-b">
+                    <td class="py-2 px-4">{{ recipe.id }}</td>
+                    <td class="py-2 px-4">{{ recipe.name }}</td>
+                    <td class="py-2 px-4">{{ recipe.time }}</td>
+                    <td class="py-2 px-4">{{ recipe.nbPeople }}</td>
+                    <td class="py-2 px-4">{{ recipe.difficulty }}</td>
+                    <td class="py-2 px-4">{{ recipe.description }}</td>
+                    <td class="py-2 px-4">{{ recipe.price }} €</td>
+                    <td class="py-2 px-4">{{ recipe.isFavorite ? 'Yes' : 'No' }}</td>
+                    <td class="py-2 px-4">
+                        {{ recipe.createdAt ? recipe.createdAt|date('d/m/Y') : '' }}
+                    </td>
+                    <td class="py-2 px-4">
+                        {{ recipe.updateAt ? recipe.updateAt|date('d/m/Y') : '' }}
+                    </td>
+                    <td class="py-2 px-4">
+                        <div class="flex justify-center gap-6">
+                            <a href="{{ path('app_recipe_show', {'id': recipe.id}) }}"
+                               class="btn bg-red-400 text-white border px-3 font-bold">
+                                show
+                            </a>
+                            <a href="{{ path('app_recipe_edit', {'id': recipe.id}) }}"
+                               class="btn bg-red-400 text-white border px-3 font-bold">
+                                edit
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11" class="text-center text-gray-500">
+                        no records found
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_recipe_new') }}">Create new</a>
+        <div class="navigation rounded-lg px-6 py-3 mt-6">
+            {{ knp_pagination_render(recipes) }}
+        </div>
+
+        
+    </div>
+</div>
 {% endblock %}

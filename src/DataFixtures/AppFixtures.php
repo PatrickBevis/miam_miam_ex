@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
 
         for($j=1; $j <25; $j++){
         $recipe = new Recipe();
-        $recipe->setName("Ingredient $j")
+        $recipe->setName("recipe $j")
                ->setTime(mt_rand(1,1440))
                ->setNbPeople(mt_rand(1,50))
                ->setDifficulty(mt_rand(1,5))

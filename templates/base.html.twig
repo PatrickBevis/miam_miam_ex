@@ -13,7 +13,9 @@
         {% endblock %}
     </head>
     <body>
-       <main class="bg-yellow-200 text-black min-h-screen">  {% block body %}
+
+    {% include 'partials/sidebar.html.twig' %}
+       <main class="bg-yellow-200 text-black ml-64 min-h-screen">  {% block body %}
        {% endblock %}
        </main>
     </body>
