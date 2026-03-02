@@ -3,12 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[UniqueEntity('name')]
+#[ORM\HasLifecycleCallbacks]
 class Recipe
 {
     #[ORM\Id]
@@ -17,30 +22,47 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Assert\Positive()]
+    #[Assert\LessThan(1441)]
     private ?int $time = null;
 
     #[ORM\Column]
+    #[Assert\Positive()]
+    #[Assert\LessThan(51)]
     private ?int $nb_people = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
+    #[Assert\Positive()]
+    #[Assert\LessThan(6)]
     private ?int $difficulty = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank()]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
+    #[Assert\Positive()]
+    #[Assert\LessThan(1001)]
     private ?float $price = null;
 
     #[ORM\Column]
     private ?bool $isFavorite = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?\DateTimeImmutable $updateAt = null;
 
     /**
@@ -52,6 +74,8 @@ class Recipe
     public function __construct()
     {
         $this->ingredient = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updateAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -160,6 +184,7 @@ class Recipe
         return $this->updateAt;
     }
 
+    #[ORM\PrePersist]
     public function setUpdateAt(\DateTimeImmutable $updateAt): static
     {
         $this->updateAt = $updateAt;
