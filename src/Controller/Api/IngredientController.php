@@ -3,9 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Ingredient;
-use App\Entity\Recipe;
 use App\Mapper\IngredientMapper;
-use App\Mapper\RecipeMapper;
 use App\Repository\IngredientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
